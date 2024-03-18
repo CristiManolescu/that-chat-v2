@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import io from "socket.io-client";
 // import { useEffect, useState } from "react";
 //27:25
@@ -27,8 +27,28 @@ function App() {
   // }, [socket]);
 
   return (
-    <Container sx={{ bgcolor: "tomato", height: "100vh" }}>
-      <Typography sx={{ p: 1 }}>Test</Typography>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      <Typography
+        variant="h1"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          color: "primary.main",
+        }}
+      >
+        That Chat 🚀
+      </Typography>
+
+      <Box sx={{ display: "flex", bgcolor: "tomato", height: "200vh" }}>
+        <Box sx={{ width: "30%" }}>test</Box>
+        <Box sx={{ width: "70%" }}>test</Box>
+      </Box>
     </Container>
     // <div className="App">
     //   <input
