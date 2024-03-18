@@ -1435,6 +1435,11 @@
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.1.tgz"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@fontsource/roboto@^5.0.12":
+  version "5.0.12"
+  resolved "https://registry.npmjs.org/@fontsource/roboto/-/roboto-5.0.12.tgz"
+  integrity sha512-x0o17jvgoSSbS9OZnUX2+xJmVRvVCfeaYJjkS7w62iN7CuJWtMf5vJj8LqgC7ibqIkitOHVW+XssRjgrcHn62g==
+
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.14"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.14.tgz"
@@ -1781,7 +1786,14 @@
   resolved "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.15.13.tgz"
   integrity sha512-ERsk9EWpiitSiKnmUdFJGshtFk647l4p7r+mjRWe/F1l5kT1NTTKkaeDLcK3/lsy0udXjMgcG0bNwzbYBdDdhQ==
 
-"@mui/material@^5.15.13":
+"@mui/icons-material@^5.15.13":
+  version "5.15.13"
+  resolved "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.15.13.tgz"
+  integrity sha512-I7CioMQKBPaKyGgcE9i8+1dgzAmox5a/0wZ0E9sIxm7PzG5KJZRRJkdK4oDT4HfYRGv61KjcHEeqH48pht1dvQ==
+  dependencies:
+    "@babel/runtime" "^7.23.9"
+
+"@mui/material@^5.0.0", "@mui/material@^5.15.13":
   version "5.15.13"
   resolved "https://registry.npmjs.org/@mui/material/-/material-5.15.13.tgz"
   integrity sha512-E+QisOJcIzTTyeJ0o3lgYMcyrmCydb2S4cn9vTtGpIB9uR6fQ6La3dIGsXgYEGyeOB9YkWzQbNzYzvyODGEWKA==
