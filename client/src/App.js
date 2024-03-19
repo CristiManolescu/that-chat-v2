@@ -1,7 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
 import io from "socket.io-client";
-// import { useEffect, useState } from "react";
-//27:25
+import MessageBox from "./components/MessageBox";
+import ChatRooms from "./components/ChatRooms";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
@@ -44,10 +44,9 @@ function App() {
       >
         That Chat 🚀
       </Typography>
-
-      <Box sx={{ display: "flex", bgcolor: "tomato", height: "200vh" }}>
-        <Box sx={{ width: "30%" }}>test</Box>
-        <Box sx={{ width: "70%" }}>test</Box>
+      <Box sx={{ display: "flex", bgcolor: "tomato", height: "50vh" }}>
+        <ChatRooms />
+        <MessageBox />
       </Box>
     </Container>
     // <div className="App">
