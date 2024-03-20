@@ -1,33 +1,43 @@
-import { Box, Container, TextField } from "@mui/material";
-import React from "react";
+import { Box, TextField, FormControl, Stack } from "@mui/material";
+import React, { useState } from "react";
 
 const MessageBox = () => {
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+
+  const handleAction = (e) => {
+    e.preventDefault();
+    setMessages([message, ...messages]);
+    setMessage("");
+  };
+
   return (
-    <Container
-      sx={{
-        width: "70%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
-      <Box
+    <form onSubmit={handleAction}>
+      <Stack
         sx={{
           border: "1px solid",
-          borderRadius: "5px",
           height: 1,
-          p: 1,
-          m: 1,
         }}
       >
-        Mesaje
-      </Box>
-      <TextField
-        variant="outlined"
-        placeholder="Enter your message here"
-        sx={{ m: 1 }}
-      />
-    </Container>
+        <Box
+          sx={{
+            border: "1px solid",
+            borderRadius: "5px",
+            p: 1,
+            m: 1,
+          }}
+        >
+          {messages}
+        </Box>
+        <TextField
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
+          variant="outlined"
+          placeholder="Enter your message here"
+          sx={{ m: 1 }}
+        />
+      </Stack>
+    </form>
   );
 };
 

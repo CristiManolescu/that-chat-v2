@@ -44,7 +44,14 @@ function App() {
       >
         That Chat 🚀
       </Typography>
-      <Box sx={{ display: "flex", bgcolor: "tomato", height: "50vh" }}>
+      <Box
+        sx={{
+          display: "flex",
+          bgcolor: "tomato",
+          height: "50vh",
+          borderRadius: "5px",
+        }}
+      >
         <ChatRooms />
         <MessageBox />
       </Box>
