@@ -1,12 +1,13 @@
-import { Box, TextField, Stack } from "@mui/material";
+import { Box, TextField, Stack, Divider } from "@mui/material";
 import React, { useState } from "react";
+import ChatMessage from "./ChatMessage";
 
 const MessageBox = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
   const handleAction = () => {
-    setMessages([message, ...messages]);
+    setMessages([...messages, message]);
     setMessage("");
   };
 
@@ -19,7 +20,10 @@ const MessageBox = () => {
         m: 1,
       }}
     >
-      <Box
+      <Stack
+        spacing={2}
+        direction="column"
+        justifyContent="end"
         sx={{
           border: "1px solid",
           borderRadius: "5px",
@@ -27,9 +31,14 @@ const MessageBox = () => {
           p: 1,
           m: 1,
         }}
+        divider={<Divider orientation="orizontal" flexItem />}
       >
-        {messages}
-      </Box>
+        {messages.length > 0
+          ? messages.map((message) => (
+              <ChatMessage key={message} message={message} />
+            ))
+          : "nimic"}
+      </Stack>
       <TextField
         onChange={(e) => setMessage(e.target.value)}
         value={message}
