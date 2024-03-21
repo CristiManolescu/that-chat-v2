@@ -1,0 +1,1 @@
+export const rooms = ["General", "Gaming", "Movies", "Hobbies"]

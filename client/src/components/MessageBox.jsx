@@ -1,4 +1,4 @@
-import { Box, TextField, Stack, Divider } from "@mui/material";
+import { TextField, Stack, Divider } from "@mui/material";
 import React, { useState } from "react";
 import ChatMessage from "./ChatMessage";
 
@@ -31,7 +31,7 @@ const MessageBox = () => {
           p: 1,
           m: 1,
         }}
-        divider={<Divider orientation="orizontal" flexItem />}
+        divider={<Divider orientation="horizontal" flexItem />}
       >
         {messages.length > 0
           ? messages.map((message) => (
