@@ -1,7 +1,8 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import io from "socket.io-client";
 import MessageBox from "./components/MessageBox";
 import ChatRooms from "./components/ChatRooms";
+import { useState } from "react";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
@@ -26,6 +27,13 @@ function App() {
   //   });
   // }, [socket]);
 
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+
+  const handleAction = () => {
+    setLoggedIn(true);
+  };
+
   return (
     <Container
       sx={{
@@ -44,17 +52,38 @@ function App() {
       >
         That Chat 🚀
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          bgcolor: "tomato",
-          height: "50vh",
-          borderRadius: "5px",
-        }}
-      >
-        <ChatRooms />
-        <MessageBox />
-      </Box>
+      {loggedIn ? (
+        <Box
+          sx={{
+            display: "flex",
+            bgcolor: "tomato",
+            height: "50vh",
+            borderRadius: "5px",
+          }}
+        >
+          <ChatRooms username={username} />
+          <MessageBox />
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <TextField
+            placeholder="Enter your name here"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleAction();
+            }}
+          />
+          <Button variant="outlined" onClick={handleAction}>
+            Log in
+          </Button>
+        </Box>
+      )}
     </Container>
     // <div className="App">
     //   <input
