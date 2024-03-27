@@ -32,6 +32,7 @@ function App() {
 
   const handleAction = () => {
     setLoggedIn(true);
+    socket.emit("online_user", username);
   };
 
   return (
