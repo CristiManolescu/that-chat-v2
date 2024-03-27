@@ -15,10 +15,12 @@ const ChatRooms = ({ username }) => {
   const [onlineUser, setOnlineUser] = useState([]);
 
   useEffect(() => {
-    socket.on("username", (data) => {
-      setOnlineUser([data, ...onlineUser]);
+    socket.off("username").on("username", (data) => {
+      setOnlineUser((previous) => [...previous, data]);
     });
   }, [socket]);
+
+  console.log(onlineUser);
 
   return (
     <Stack sx={{ width: "30%", p: 1, m: 1 }} spacing={2}>

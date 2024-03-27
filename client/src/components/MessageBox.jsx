@@ -46,7 +46,7 @@ const MessageBox = () => {
         placeholder="Enter your message here"
         sx={{ m: 1 }}
         onKeyDown={(e) => {
-          if (e.key === "Enter") handleAction();
+          e.key === "Enter" && handleAction();
         }}
       />
     </Stack>

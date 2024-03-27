@@ -77,7 +77,7 @@ function App() {
             onChange={(e) => setUsername(e.target.value)}
             value={username}
             onKeyDown={(e) => {
-              if (e.key === "Enter") handleAction();
+              e.key === "Enter" && handleAction();
             }}
           />
           <Button variant="outlined" onClick={handleAction}>
