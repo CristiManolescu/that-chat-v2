@@ -33,6 +33,7 @@ function App() {
   const handleAction = () => {
     setLoggedIn(true);
     socket.emit("online_user", username);
+    socket.emit("join_room", "whatsapp");
   };
 
   return (

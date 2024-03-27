@@ -20,8 +20,6 @@ const ChatRooms = ({ username }) => {
     });
   }, [socket]);
 
-  console.log(onlineUser);
-
   return (
     <Stack sx={{ width: "30%", p: 1, m: 1 }} spacing={2}>
       <Typography variant="h3">{`Hello ${username}!`}</Typography>
