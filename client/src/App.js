@@ -6,34 +6,15 @@ import { useState } from "react";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
-  // const [room, setRoom] = useState("");
-
-  // const [message, setMessage] = useState("");
-  // const [messageReceived, setMessageReceived] = useState("");
-
-  // const joinRoom = () => {
-  //   if (room !== "") {
-  //     socket.emit("join_room", room);
-  //   }
-  // };
-
-  // const sendMessage = () => {
-  //   socket.emit("send_message", { message, room });
-  // };
-
-  // useEffect(() => {
-  //   socket.on("receive_message", (data) => {
-  //     setMessageReceived(data.message);
-  //   });
-  // }, [socket]);
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
 
   const handleAction = () => {
+    if (username !== "" && room !==""){
     setLoggedIn(true);
-    socket.emit("online_user", username);
-    socket.emit("join_room", "whatsapp");
+    socket.emit("connection_data", {username, room});
+    }
   };
 
   return (
@@ -75,7 +56,7 @@ function App() {
         >
           <TextField
             placeholder="Enter your name here"
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {setUsername(e.target.value); setRoom("whatsapp")}}
             value={username}
             onKeyDown={(e) => {
               e.key === "Enter" && handleAction();
@@ -87,19 +68,6 @@ function App() {
         </Box>
       )}
     </Container>
-    // <div className="App">
-    //   <input
-    //     placeholder="Room Number"
-    //     onChange={(event) => setRoom(event.target.value)}
-    //   />
-    //   <button onClick={joinRoom}>Join Room</button>
-    //   <input
-    //     placeholder="Message..."
-    //     onChange={(event) => setMessage(event.target.value)}
-    //   />
-    //   <button onClick={sendMessage}>Send Message</button>
-    //   {messageReceived && <p>{`Mesajul primit este: ${messageReceived}`}</p>}
-    // </div>
   );
 }
 

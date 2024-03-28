@@ -8,16 +8,18 @@ import PersonBox from "./PersonBox";
 const socket = io.connect("http://localhost:3001");
 
 const ChatRooms = ({ username }) => {
-  // const joinRoom = (chatRoom) => {
-  //   socket.emit("join_room", chatRoom); // change the Chat Room
-  //   console.log(chatRoom);
-  // };
   const [onlineUser, setOnlineUser] = useState([]);
 
   useEffect(() => {
-    socket.off("username").on("username", (data) => {
-      setOnlineUser((previous) => [...previous, data]);
+    // socket.off("username").on("username", (data) => {
+    //   console.log(data);
+    //   setOnlineUser((previous) => [...previous, data]);
+    // });
+
+    socket.on("username", (data) => {
+      console.log(data);
     });
+    console.log("test");
   }, [socket]);
 
   return (
