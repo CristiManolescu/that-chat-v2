@@ -11,15 +11,10 @@ const ChatRooms = ({ username }) => {
   const [onlineUser, setOnlineUser] = useState([]);
 
   useEffect(() => {
-    // socket.off("username").on("username", (data) => {
-    //   console.log(data);
-    //   setOnlineUser((previous) => [...previous, data]);
-    // });
-
-    socket.on("username", (data) => {
+    socket.off("username").on("username", (data) => {
       console.log(data);
+      setOnlineUser((previous) => [...previous, data]);
     });
-    console.log("test");
   }, [socket]);
 
   return (

@@ -18,12 +18,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("connection_data", (data) => {
-    socket.join(data.room);
-    console.log(`User with ID: ${socket.id} & USERNAME: ${data.username} joined ROOM: ${data.room}`);
-
-    socket.to(data.room).emit("username", data.username)
-
+  socket.on("connected_user", (data) => {
+    socket.broadcast.emit("username", data)
   });
 });
 

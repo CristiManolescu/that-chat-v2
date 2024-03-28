@@ -8,13 +8,10 @@ const socket = io.connect("http://localhost:3001");
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
 
   const handleAction = () => {
-    if (username !== "" && room !==""){
+    socket.emit("connected_user", username);
     setLoggedIn(true);
-    socket.emit("connection_data", {username, room});
-    }
   };
 
   return (
@@ -56,7 +53,7 @@ function App() {
         >
           <TextField
             placeholder="Enter your name here"
-            onChange={(e) => {setUsername(e.target.value); setRoom("whatsapp")}}
+            onChange={(e) => setUsername(e.target.value)}
             value={username}
             onKeyDown={(e) => {
               e.key === "Enter" && handleAction();
