@@ -6,6 +6,9 @@ const MessageBox = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
+  // const [currentMessage, setCurrentMessage] = useState("");
+  // const [messageList, setMessageList] = useState([]);
+
   const handleAction = () => {
     setMessages([...messages, message]);
     setMessage("");
