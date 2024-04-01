@@ -1,18 +1,34 @@
 import { Box, Divider, TextField, Stack } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatMessage from "./ChatMessage";
 
-const MessageBox = () => {
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
+const MessageBox = ({ username, room, socket }) => {
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [messageList, setMessageList] = useState([]);
 
-  // const [currentMessage, setCurrentMessage] = useState("");
-  // const [messageList, setMessageList] = useState([]);
+  const sendMessage = async () => {
+    if (currentMessage != "") {
+      const messageData = {
+        room: room,
+        author: username,
+        message: currentMessage,
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
+      };
 
-  const handleAction = () => {
-    setMessages([...messages, message]);
-    setMessage("");
+      await socket.emit("send_message", messageData);
+      setMessageList((list) => [...list, messageData]);
+      setCurrentMessage("");
+    }
   };
+
+  useEffect(() => {
+    socket.off("receive_message").on("receive_message", (data) => {
+      setMessageList((list) => [...list, data]);
+    });
+  }, [socket]);
 
   return (
     <Stack
@@ -38,20 +54,18 @@ const MessageBox = () => {
         }}
         divider={<Divider orientation="horizontal" flexItem />}
       >
-        {messages.length > 0
-          ? messages.map((message) => (
-              <ChatMessage key={message} message={message} />
-            ))
-          : "nimic"}
+        {messageList.map((messageContent) => (
+          <ChatMessage messageContent={messageContent} />
+        ))}
       </Stack>
       <TextField
-        onChange={(e) => setMessage(e.target.value)}
-        value={message}
+        onChange={(e) => setCurrentMessage(e.target.value)}
+        value={currentMessage}
         variant="outlined"
         placeholder="Enter your message here"
         sx={{ m: 1 }}
         onKeyDown={(e) => {
-          e.key === "Enter" && handleAction();
+          e.key === "Enter" && sendMessage();
         }}
       />
     </Stack>

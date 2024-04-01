@@ -55,7 +55,7 @@ function App() {
           }}
         >
           {/* <ChatRooms username={username} /> */}
-          <MessageBox />
+          <MessageBox username={username} room={room} socket={socket} />
         </Box>
       ) : (
         <Box
