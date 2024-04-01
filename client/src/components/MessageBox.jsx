@@ -1,4 +1,4 @@
-import { TextField, Stack, Divider } from "@mui/material";
+import { Box, Divider, TextField, Stack } from "@mui/material";
 import React, { useState } from "react";
 import ChatMessage from "./ChatMessage";
 
@@ -23,6 +23,7 @@ const MessageBox = () => {
         m: 1,
       }}
     >
+      <Box>Live chat</Box>
       <Stack
         spacing={2}
         direction="column"
@@ -33,6 +34,7 @@ const MessageBox = () => {
           height: 1,
           p: 1,
           m: 1,
+          overflowY: "auto",
         }}
         divider={<Divider orientation="horizontal" flexItem />}
       >
