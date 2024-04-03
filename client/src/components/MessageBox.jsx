@@ -1,4 +1,4 @@
-import { Box, Divider, TextField, Stack } from "@mui/material";
+import { Box, TextField, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ChatMessage from "./ChatMessage";
 
@@ -7,7 +7,7 @@ const MessageBox = ({ username, room, socket }) => {
   const [messageList, setMessageList] = useState([]);
 
   const sendMessage = async () => {
-    if (currentMessage != "") {
+    if (currentMessage !== "") {
       const messageData = {
         room: room,
         author: username,
@@ -52,10 +52,13 @@ const MessageBox = ({ username, room, socket }) => {
           m: 1,
           overflowY: "auto",
         }}
-        divider={<Divider orientation="horizontal" flexItem />}
       >
-        {messageList.map((messageContent) => (
-          <ChatMessage messageContent={messageContent} />
+        {messageList.map((messageContent, index) => (
+          <ChatMessage
+            key={index}
+            messageContent={messageContent}
+            username={username}
+          />
         ))}
       </Stack>
       <TextField

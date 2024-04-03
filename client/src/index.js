@@ -26,6 +26,9 @@ const theme = createTheme({
       fontSize: "1.5rem",
       fontWeight: "600",
     },
+    author: {
+      fontWeight: "bold",
+    },
   },
 });
 
