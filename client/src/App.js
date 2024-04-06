@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import io from "socket.io-client";
 import MessageBox from "./components/MessageBox";
-//import ChatRooms from "./components/ChatRooms";
+//import bgImage from "./images/background.jpg";
 import { useState } from "react";
 const socket = io.connect("http://localhost:3001");
 
@@ -32,7 +32,6 @@ function App() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
       }}
     >
       <Typography
@@ -49,24 +48,24 @@ function App() {
         <Box
           sx={{
             display: "flex",
-            bgcolor: "tomato",
             height: "50vh",
-            borderRadius: "5px",
           }}
         >
-          {/* <ChatRooms username={username} /> */}
           <MessageBox username={username} room={room} socket={socket} />
         </Box>
       ) : (
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 2,
-          }}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          gap={2}
+          p={2}
+          minHeight="50vh"
         >
+          <Typography variant="h3" color="primary.main">
+            Enter the chat
+          </Typography>
           <TextField
             placeholder="Enter your name"
             onChange={(e) => setUsername(e.target.value)}
@@ -84,7 +83,7 @@ function App() {
             }}
           />
           <Button variant="outlined" onClick={handleAction}>
-            Log in
+            Join
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>

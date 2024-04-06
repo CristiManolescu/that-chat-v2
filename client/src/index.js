@@ -24,7 +24,7 @@ const theme = createTheme({
     },
     h3: {
       fontSize: "1.5rem",
-      fontWeight: "600",
+      fontWeight: "500",
     },
     author: {
       fontWeight: "bold",

@@ -1,4 +1,4 @@
-import { Box, TextField, Stack } from "@mui/material";
+import { Box, TextField, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ChatMessage from "./ChatMessage";
 
@@ -34,12 +34,15 @@ const MessageBox = ({ username, room, socket }) => {
     <Stack
       sx={{
         border: "1px solid",
+        borderRadius: "5px",
         width: 1,
         p: 1,
         m: 1,
       }}
     >
-      <Box>Live chat</Box>
+      <Typography variant="h3" color="secondary.main">
+        Live chat
+      </Typography>
       <Stack
         spacing={2}
         direction="column"
