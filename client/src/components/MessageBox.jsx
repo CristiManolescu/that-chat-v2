@@ -48,8 +48,6 @@ const MessageBox = ({ username, room, socket }) => {
         direction="column"
         justifyContent="end"
         sx={{
-          border: "1px solid",
-          borderRadius: "5px",
           height: 1,
           p: 1,
           m: 1,

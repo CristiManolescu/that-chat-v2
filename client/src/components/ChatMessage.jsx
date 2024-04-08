@@ -20,7 +20,7 @@ const ChatMessage = ({ messageContent, username }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-end",
+            alignItems: author === username ? "flex-end" : "flex-start",
           }}
         >
           <Typography variant="subtitle2">{time}</Typography>
