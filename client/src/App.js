@@ -1,15 +1,21 @@
+import { useState } from "react";
+
 import {
+  Avatar,
   Alert,
   Box,
   Button,
   Container,
+  Checkbox,
+  FormControlLabel,
   TextField,
   Typography,
 } from "@mui/material";
-import io from "socket.io-client";
+import LogoDevIcon from "@mui/icons-material/LogoDev";
+
 import MessageBox from "./components/MessageBox";
-//import bgImage from "./images/background.jpg";
-import { useState } from "react";
+
+import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
@@ -51,7 +57,12 @@ function App() {
             height: "50vh",
           }}
         >
-          <MessageBox username={username} room={room} socket={socket} />
+          <MessageBox
+            username={username}
+            room={room}
+            socket={socket}
+            setLoggedIn={setLoggedIn}
+          />
         </Box>
       ) : (
         <Box
@@ -62,12 +73,25 @@ function App() {
           gap={2}
           p={2}
           minHeight="50vh"
+          border="1px solid"
+          borderRadius="25px"
+          color="gray"
         >
-          <Typography variant="h3" color="primary.main">
-            Enter the chat
-          </Typography>
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <Avatar
+              sx={{
+                m: 1,
+                bgcolor: "secondary.main",
+              }}
+            >
+              <LogoDevIcon />
+            </Avatar>
+            <Typography variant="h3" color="primary.main">
+              Join the conversation!
+            </Typography>
+          </Box>
           <TextField
-            placeholder="Enter your name"
+            placeholder="Username *"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
             onKeyDown={(e) => {
@@ -75,15 +99,19 @@ function App() {
             }}
           />
           <TextField
-            placeholder="Enter room number"
+            placeholder="Room number *"
             onChange={(e) => setRoom(e.target.value)}
             value={room}
             onKeyDown={(e) => {
               e.key === "Enter" && handleAction();
             }}
           />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
           <Button variant="outlined" onClick={handleAction}>
-            Join
+            Enter the room
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>
