@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Avatar,
@@ -22,7 +22,20 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    localStorage.getItem("rememberMe") === "true"
+      ? setRememberMe(true)
+      : setRememberMe(false);
+    localStorage.getItem("username")
+      ? setUsername(localStorage.getItem("username"))
+      : setUsername("");
+    localStorage.getItem("room")
+      ? setRoom(localStorage.getItem("room"))
+      : setRoom("");
+  }, []);
 
   const handleAction = () => {
     if (username !== "" && room !== "") {
@@ -30,6 +43,18 @@ function App() {
       setLoggedIn(true);
     } else {
       setError("Please introduce a user/room name!");
+    }
+  };
+
+  const handleCheck = () => {
+    setRememberMe(!rememberMe);
+    localStorage.setItem("rememberMe", !rememberMe);
+    if (!rememberMe) {
+      localStorage.setItem("username", username);
+      localStorage.setItem("room", room);
+    } else {
+      localStorage.setItem("username", "");
+      localStorage.setItem("room", "");
     }
   };
 
@@ -107,7 +132,14 @@ function App() {
             }}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={
+              <Checkbox
+                value="remember"
+                color="primary"
+                checked={rememberMe}
+                onChange={handleCheck}
+              />
+            }
             label="Remember me"
           />
           <Button variant="outlined" onClick={handleAction}>
