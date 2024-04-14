@@ -4,13 +4,24 @@ import ChatMessage from "./ChatMessage";
 import { Box, Stack, TextField, Typography } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const MessageBox = ({ username, room, socket, setLoggedIn }) => {
+const MessageBox = ({
+  username,
+  room,
+  socket,
+  setLoggedIn,
+  setUsername,
+  setRoom,
+  setRememberMe,
+}) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
   const logoutUser = () => {
     socket.emit("leave_room", room);
     setLoggedIn(false);
+    setUsername("");
+    setRoom("");
+    setRememberMe(false);
   };
 
   const sendMessage = async () => {

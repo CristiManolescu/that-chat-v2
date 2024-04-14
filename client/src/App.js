@@ -26,15 +26,12 @@ function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    localStorage.getItem("rememberMe") === "true"
-      ? setRememberMe(true)
-      : setRememberMe(false);
-    localStorage.getItem("username")
-      ? setUsername(localStorage.getItem("username"))
-      : setUsername("");
-    localStorage.getItem("room")
-      ? setRoom(localStorage.getItem("room"))
-      : setRoom("");
+    localStorage.getItem("rememberMe") === "true" && setRememberMe(true);
+
+    localStorage.getItem("username") &&
+      setUsername(localStorage.getItem("username"));
+
+    localStorage.getItem("room") && setRoom(localStorage.getItem("room"));
   }, []);
 
   const handleAction = () => {
@@ -87,6 +84,9 @@ function App() {
             room={room}
             socket={socket}
             setLoggedIn={setLoggedIn}
+            setUsername={setUsername}
+            setRoom={setRoom}
+            setRememberMe={setRememberMe}
           />
         </Box>
       ) : (
