@@ -1,21 +1,11 @@
 import { useEffect, useState } from "react";
 
-import {
-  Avatar,
-  Alert,
-  Box,
-  Button,
-  Container,
-  Checkbox,
-  FormControlLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
-import LogoDevIcon from "@mui/icons-material/LogoDev";
+import { Container, Typography } from "@mui/material";
 
-import MessageBox from "./components/MessageBox";
+import ChatBox from "./components/ChatBox";
 
 import io from "socket.io-client";
+import JoinRoom from "./components/JoinRoom";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
@@ -23,37 +13,6 @@ function App() {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    localStorage.getItem("rememberMe") === "true" && setRememberMe(true);
-
-    localStorage.getItem("username") &&
-      setUsername(localStorage.getItem("username"));
-
-    localStorage.getItem("room") && setRoom(localStorage.getItem("room"));
-  }, []);
-
-  const handleAction = () => {
-    if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
-      setLoggedIn(true);
-    } else {
-      setError("Please introduce a user/room name!");
-    }
-  };
-
-  const handleCheck = () => {
-    setRememberMe(!rememberMe);
-    localStorage.setItem("rememberMe", !rememberMe);
-    if (!rememberMe) {
-      localStorage.setItem("username", username);
-      localStorage.setItem("room", room);
-    } else {
-      localStorage.setItem("username", "");
-      localStorage.setItem("room", "");
-    }
-  };
 
   return (
     <Container
@@ -73,80 +32,26 @@ function App() {
         That Chat 🚀
       </Typography>
       {loggedIn ? (
-        <Box
-          sx={{
-            display: "flex",
-            height: "50vh",
-          }}
-        >
-          <MessageBox
-            username={username}
-            room={room}
-            socket={socket}
-            setLoggedIn={setLoggedIn}
-            setUsername={setUsername}
-            setRoom={setRoom}
-            setRememberMe={setRememberMe}
-          />
-        </Box>
+        <ChatBox
+          username={username}
+          room={room}
+          socket={socket}
+          setLoggedIn={setLoggedIn}
+          setUsername={setUsername}
+          setRoom={setRoom}
+          setRememberMe={setRememberMe}
+        />
       ) : (
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          gap={2}
-          p={2}
-          minHeight="50vh"
-          border="1px solid"
-          borderRadius="25px"
-          color="gray"
-        >
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <Avatar
-              sx={{
-                m: 1,
-                bgcolor: "secondary.main",
-              }}
-            >
-              <LogoDevIcon />
-            </Avatar>
-            <Typography variant="h3" color="primary.main">
-              Join the conversation!
-            </Typography>
-          </Box>
-          <TextField
-            placeholder="Username *"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-            onKeyDown={(e) => {
-              e.key === "Enter" && handleAction();
-            }}
-          />
-          <TextField
-            placeholder="Room number *"
-            onChange={(e) => setRoom(e.target.value)}
-            value={room}
-            onKeyDown={(e) => {
-              e.key === "Enter" && handleAction();
-            }}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="remember"
-                color="primary"
-                checked={rememberMe}
-                onChange={handleCheck}
-              />
-            }
-            label="Remember me"
-          />
-          <Button variant="outlined" onClick={handleAction}>
-            Enter the room
-          </Button>
-          {error && <Alert severity="error">{error}</Alert>}
-        </Box>
+        <JoinRoom
+          username={username}
+          room={room}
+          socket={socket}
+          rememberMe={rememberMe}
+          setUsername={setUsername}
+          setRoom={setRoom}
+          setRememberMe={setRememberMe}
+          setLoggedIn={setLoggedIn}
+        />
       )}
     </Container>
   );
