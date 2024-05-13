@@ -71,7 +71,7 @@ const ChatBox = ({
         <Stack
           spacing={2}
           direction="column"
-          justifyContent="end"
+          justifyContent="flex-end"
           sx={{
             height: 1,
             p: 1,
